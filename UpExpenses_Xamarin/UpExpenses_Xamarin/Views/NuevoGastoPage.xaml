@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UpExpenses_Xamarin.Views.NuevoGastoPage">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label 
+                Text="Nuevo gasto" 
+                FontSize="20" 
+                TextColor="AliceBlue"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Nuevo gasto!"/>
+
+            <Entry Text="{Binding NameFilePDF, Mode=TwoWay}"  
+                   Placeholder="Agregar archivo PDF." 
+                   IsEnabled="False"/>
+
+            <Button Text="Seleccionar PDF" 
+                    Command="{Binding SelectPDF}" 
+                    HorizontalOptions="Center"/>
+
+            <Entry Text="{Binding NameFileXML, Mode=TwoWay}"  
+                   Placeholder="Agregar archivo XML." 
+                   IsEnabled="False"/>
+            <Button Text="Seleccionar XML" 
+                    Command="{Binding SelectXML}" 
+                    HorizontalOptions="Center"/>
+
+            <Button Text="Cargar" 
+                    HorizontalOptions="Center" 
+                    Command="{Binding Load}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

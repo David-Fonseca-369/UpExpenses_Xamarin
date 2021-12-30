@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <!--Color de fondo del splash screen-->
+    <color android:color="@color/splash_background"/>
+  </item>
+  <item>
+    <!--imagen del spplash screen-->
+    <bitmap android:src="@drawable/logoelkay"
+     android:tileMode="disabled"
+     android:gravity="center"/>
+  </item>
+</layer-list>

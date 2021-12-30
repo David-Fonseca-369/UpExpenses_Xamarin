@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             Visual="Material"
+             xmlns:behaviorsPack ="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             
+             x:Class="UpExpenses_Xamarin.Views.NuevoReporteGastosPage">
+    
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label 
+                Text="Nuevo reporte de gasto" 
+                FontSize="20" 
+                TextColor="AliceBlue"/>
+            
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout BackgroundColor="White">
+                
+                <Label Text="Nuevo" 
+                       HorizontalOptions="Center" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="Black" 
+                       Padding="0,30"/>
+
+                <StackLayout Margin="30,-15">
+                    <Label 
+                        Text="Desde"
+                        Margin="10,-5"
+                        TextColor="Black"/>
+                    <DatePicker 
+                        Date="{Binding SelectDesde, Mode=TwoWay}" 
+                        BackgroundColor="White"                        
+                        Format="dd/MM/yyyy">
+                        <DatePicker.Behaviors>
+                            <behaviorsPack:EventToCommandBehavior
+                             Command="{Binding TappedCommandDesde}"
+                             EventName="DateSelected"/>
+                        </DatePicker.Behaviors>
+                    </DatePicker>
+                    <Label 
+                        Text="Hasta" 
+                        TextColor="Black"
+                        Margin="10,5,0,-5"/>
+                    <DatePicker
+                        Date="{Binding SelectHasta, Mode=TwoWay}" 
+                        BackgroundColor="White"                        
+                        Format="dd/MM/yyyy">
+                        <DatePicker.Behaviors>
+                            <behaviorsPack:EventToCommandBehavior
+                             Command="{Binding TappedCommandHasta}"
+                             EventName="DateSelected"/>
+                        </DatePicker.Behaviors>
+                    </DatePicker>
+                </StackLayout>
+
+                <StackLayout Padding="30,20">
+                    <Entry Placeholder="Concepto" 
+                           Text="{Binding Concepto, Mode=TwoWay}" 
+                           BackgroundColor="White"/>
+
+                    <Picker Title="Tipo de gasto" 
+                            ItemsSource="{Binding ListTiposGastos, Mode=TwoWay}" 
+                            SelectedItem="{Binding SelectedTipoGasto, Mode=TwoWay}" 
+                            BackgroundColor="White">
+
+                        <Picker.Behaviors>
+                            <behaviorsPack:EventToCommandBehavior
+                             Command="{Binding TappedCommandTipoGasto}"
+                             EventName="SelectedIndexChanged"
+                             EventArgsPropertyPath="Item"/>
+                        </Picker.Behaviors>
+                    </Picker>
+                    <Picker Title="Anticipo" 
+                        ItemsSource="{Binding ListAnticipos, Mode=TwoWay}"
+                        ItemDisplayBinding="{Binding Por_Comprobar, Mode=TwoWay}"
+                        SelectedIndex="{Binding SelectedIndexAnticipo, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedAnticipo, Mode=TwoWay}" 
+                        IsVisible="{Binding VisibleAnticipo, Mode=TwoWay}" 
+                        BackgroundColor="White">
+                     
+                </Picker>
+                    <Picker Title="Viaje" 
+                        ItemsSource="{Binding Viaje}" 
+                        SelectedItem="{Binding SelectedViaje, Mode=TwoWay}" 
+                        BackgroundColor="White">
+                    </Picker>
+                    <Picker Title="Razón" 
+                        ItemsSource="{Binding Razon}" 
+                        SelectedItem="{Binding SelectedRazon, Mode=TwoWay}" 
+                        BackgroundColor="White">
+
+                    <Picker.Behaviors>
+                            <behaviorsPack:EventToCommandBehavior
+                            Command="{Binding TappedCommandRazon}"
+                            EventName="SelectedIndexChanged"
+                            EventArgsPropertyPath="Item"
+                    />
+                        </Picker.Behaviors>
+                    </Picker>
+                
+                    <Entry Placeholder="Nombre del cliente" 
+                       Text="{Binding NombreCliente, Mode=TwoWay}" 
+                       IsVisible="{Binding VisibleRazon, Mode=TwoWay}" 
+                       BackgroundColor="White"/>
+
+                    <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Margin="0,20,0,0"
+                                IsVisible="{Binding VisibleCheckBox, Mode=TwoWay}">
+                        
+                        <CheckBox IsChecked="{Binding VisibleProjectNumber, Mode=TwoWay}"                                   
+                                  Margin="0,-7" 
+                                  Color="Black"/>
+
+                        <Label Text="Ingresar número de proyecto." 
+                               TextColor="Black" 
+                               Margin="-15,0" 
+                               FontSize="15"/>
+                    </FlexLayout>
+                
+                    <Entry Text="{Binding NoProject, Mode=TwoWay}"
+                           IsVisible="{Binding VisibleProjectNumber, Mode=TwoWay}"
+                           Placeholder="Número de proyecto"
+                           BackgroundColor="White"
+                           Keyboard="Numeric"></Entry>
+
+                    <Button Text="Continuar" 
+                            Padding="0,5" 
+                            Margin="0,20,0,0" 
+                            Command="{Binding Continuar}" 
+                            CornerRadius="50" 
+                            BackgroundColor="Black"/>
+                </StackLayout>
+
+
+            
+        </StackLayout>
+        </ScrollView>
+       
+    </ContentPage.Content>
+</ContentPage>

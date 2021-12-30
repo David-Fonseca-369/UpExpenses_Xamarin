@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UpExpenses_Xamarin.Views.DetallesReporteAnteriorPage"
+             
+             xmlns:behaviorsPack ="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             
+             Visual="Material">
+
+    <NavigationPage.TitleView>
+        <Label Text="Detalles del reporte"
+                   FontSize="20"
+                   TextColor="White"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout 
+                Padding="20" 
+                BackgroundColor="White">
+
+                <Label Text="Reporte"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="20"
+                    TextColor="Black"
+                    Margin="0,0,0,30"
+                    FontAttributes="Bold"/>
+                <!-- der, arrighba,izq , abajo-->
+
+                <RefreshView 
+                    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                    Command="{Binding RefreshCommand}"
+                    RefreshColor="Black">
+
+                    <ListView 
+                    ItemsSource="{Binding Reportes, Mode=TwoWay}" 
+                    HasUnevenRows="True" 
+                    SeparatorVisibility="Default" 
+                    SelectionMode="None"
+                    Margin="0,0,30,0"
+                    IsRefreshing="False">
+                        <ListView.Behaviors>
+
+                            <behaviorsPack:EventToCommandBehavior
+                                Command="{Binding ItemTappedCommand}"
+                                EventName="ItemTapped"
+                                EventArgsPropertyPath="Item"/>  
+                        </ListView.Behaviors>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="0">
+                                        <Grid.RowDefinitions>
+
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <!--<Image Grid.RowSpan="2"  Grid.Column="0" Source="{Binding ImgIcon}" Margin="0,0,0,0"></Image>-->
+                                        <Label Grid.RowSpan="1"   
+                                           Grid.Column="0" 
+                                           FontAttributes="Bold" 
+                                           Text="{Binding Titulo}" 
+                                           TextColor="Black" 
+                                           FontSize="14" 
+                                           Padding="0,10,0,0"/>
+
+                                        <Label Grid.RowSpan="1"   
+                                           Grid.Column="1" 
+                                           Text="{Binding Resultado}" 
+                                           TextColor="#6C6463" 
+                                           FontSize="14" 
+                                           Padding="0,10,0,0"
+                                           HorizontalOptions="End" 
+                                           LineBreakMode="TailTruncation"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </RefreshView>
+                <StackLayout>
+                    <Button 
+                        Command="{Binding Expenses}"
+                        Text="Gastos" 
+                        CornerRadius="50"
+                        BackgroundColor="Black"/>
+                </StackLayout>
+
+                <BoxView   
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    HeightRequest="1"
+                    WidthRequest="300"  
+                    Color="#5b5d68"
+                    Margin="0,60,0,0"/>
+
+                <Label 
+                    Text="Sistema de gastos" 
+                    HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

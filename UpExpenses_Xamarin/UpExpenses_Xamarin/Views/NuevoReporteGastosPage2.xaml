@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             Visual="Material"
+             xmlns:behaviorsPack ="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             
+             x:Class="UpExpenses_Xamarin.Views.NuevoReporteGastosPage2">
+    
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Nuevo gasto" FontSize="20" TextColor="AliceBlue"></Label>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout Padding="30,20" BackgroundColor="White">
+                
+                <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               Color="Black"
+                               IsVisible="{Binding IsBusy, Mode=TwoWay}"/>
+                
+                <Label Text="Seleccione el tipo de comprobante: " TextColor="Black"></Label>
+                    <Picker Title="Tipo de comprobante" 
+                            Margin="0,20" ItemsSource="{Binding TipoComprobante}" 
+                            SelectedItem="{Binding SelectedTipoComprobante}" 
+                            BackgroundColor="White">
+                        <Picker.Behaviors>
+                            <behaviorsPack:EventToCommandBehavior
+                             Command="{Binding TappedCommandTipoComprobante}"
+                             EventName="SelectedIndexChanged"
+                             EventArgsPropertyPath="Item"/>
+                        </Picker.Behaviors>
+                    </Picker>
+                    <!-- Cargar factura-->
+                    <StackLayout IsVisible="{Binding VisibleConFactura, Mode=TwoWay}">
+                        <FlexLayout Direction="Row"
+                        AlignItems="Start"
+                        JustifyContent="Center">
+
+                            <Entry Placeholder="Archivo PDF" Text="{Binding NameFilePDF, Mode=TwoWay}" WidthRequest="200" IsReadOnly="True" BackgroundColor="White"></Entry>
+                            <Button Text="Adjuntar" Command="{Binding SelectPDF}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,15,0,0" BackgroundColor="Black" CornerRadius="50"></Button>
+                        </FlexLayout>
+
+                        <FlexLayout Direction="Row"
+                        AlignItems="Start"
+                        JustifyContent="Center">
+
+                            <Entry Placeholder="Archivo XML" Text="{Binding NameFileXML, Mode=TwoWay}" WidthRequest="200" IsReadOnly="True" BackgroundColor="White"></Entry>
+                            <Button Text="Adjuntar" Command="{Binding SelectXML}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,15,0,10" BackgroundColor="Black" CornerRadius="50"></Button>
+                        </FlexLayout>
+                        <Button Text="Cargar" Command="{Binding UploadBill}" Margin="0,20" BackgroundColor="Black" CornerRadius="50"></Button>
+
+                    <BoxView   
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        HeightRequest="1"
+                        WidthRequest="400"  
+                        Color="#5b5d68" Margin="0,20"/>
+                </StackLayout>
+
+                    <!--<BoxView   VerticalOptions="Center"
+           HorizontalOptions="Center"
+           HeightRequest="1"
+           WidthRequest="400"  
+           Color="#5b5d68"></BoxView>-->
+
+                    <!--Carga de factura exitosas-->
+                    <StackLayout IsVisible="{Binding VisibleSuccessfulBill, Mode=TwoWay}">
+                        <!--<StackLayout IsVisible="true">-->
+                        <Image Source="check.png" WidthRequest="25" HeightRequest="25"></Image>
+                        <Label Text="¡Carga exitosa!" FontAttributes="Bold" FontSize="20" TextColor="Black"  HorizontalOptions="Center" Margin="0,20" Padding="20,0,20,0"></Label>
+                        <Button Text="Ver factura" Command="{Binding SeeBill}" BackgroundColor="Black" CornerRadius="50"></Button>
+
+                    <BoxView   
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        HeightRequest="1"
+                        WidthRequest="400"  
+                        Color="#5b5d68" Margin="0,20"/>
+                </StackLayout>
+                    <!--Carga de imagen-->
+
+                <StackLayout IsVisible="{Binding VisibleImage}">
+                        <Label Text="Selecciona:"></Label>
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+                            <Button Text="Imagen" Command="{Binding SelectImage}" BackgroundColor="Black" CornerRadius="50"></Button>
+                            <Button Text="Foto" Margin="20,0,20,0" Command="{Binding TakePhoto}" BackgroundColor="Black" CornerRadius="50"></Button>
+                        </FlexLayout>
+                        <ImageButton Source="{Binding ResultImage, Mode=TwoWay}" 
+                                 Margin="0,30"
+                                 Command="{Binding OpenImage}"
+                                 BackgroundColor="Transparent"/>
+                </StackLayout>
+
+
+
+                    <!--Vista de detalles de gasto-->
+
+
+                    <StackLayout IsVisible="{Binding VisibleDetalleGasto, Mode=TwoWay}">
+                        <!--<StackLayout IsVisible="true" Margin="0,20">-->
+
+                    <Label Text="Detalles" 
+                           Margin="0,10" 
+                           FontSize="Medium" 
+                           FontAttributes="Bold" 
+                           HorizontalTextAlignment="Center" 
+                           TextColor="Black"/>
+
+                    <!--No. de serie para imagen-->
+                        <Entry Placeholder="No. Serie/Comprobante" 
+                           BackgroundColor="White" 
+                           Text="{Binding Serie_Comprobante, Mode=TwoWay}"
+                           IsVisible="{Binding Serie_ComprobanteVisible, Mode=TwoWay}"                           
+                           />
+
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+
+                            <Entry Placeholder="Importe" 
+                                   WidthRequest="400" 
+                                   Text="{Binding Subtotal, Mode= TwoWay}" 
+                                   BackgroundColor="White" 
+                                   Keyboard="Numeric" 
+                                   IsReadOnly="{Binding EditarDetalles, Mode=TwoWay}">
+                                <Entry.Behaviors>
+                                    <behaviorsPack:EventToCommandBehavior
+                                    Command="{Binding TextChangedCommand}"
+                                    EventName="TextChanged"
+                                    EventArgsPropertyPath="NewTextValue">
+                                    </behaviorsPack:EventToCommandBehavior>
+                                </Entry.Behaviors>
+                            </Entry>
+                        <Entry Placeholder="Impuesto extra" 
+                               WidthRequest="400"
+                               Margin="20,0,0,0"
+                               Text="{Binding ImpuestoExtra, Mode= TwoWay}" 
+                               TextColor="Red"
+                               BackgroundColor="White" 
+                               PlaceholderColor="Red"
+                               Keyboard="Numeric" 
+                               IsReadOnly="True"
+                               IsVisible="{Binding VisibleImpuestoExtra}">
+                            <Entry.Behaviors>
+                                <behaviorsPack:EventToCommandBehavior
+                                    Command="{Binding TextChangedCommand}"
+                                    EventName="TextChanged"
+                                    EventArgsPropertyPath="NewTextValue">
+                                </behaviorsPack:EventToCommandBehavior>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Entry  Placeholder="IVA 16%" 
+                                    WidthRequest="400" 
+                                    Margin="20,0,0,0" 
+                                    Text="{Binding IVA, Mode = TwoWay}" 
+                                    BackgroundColor="White" 
+                                    Keyboard="Numeric" 
+                                    IsReadOnly="{Binding EditarDetalles, Mode=TwoWay}"
+                                    IsVisible="{Binding VisibleIVA, Mode=TwoWay}">
+                                <Entry.Behaviors>
+                                    <behaviorsPack:EventToCommandBehavior
+                                    Command="{Binding TextChangedCommand}"
+                                    EventName="TextChanged"
+                                    EventArgsPropertyPath="NewTextValue">
+                                    </behaviorsPack:EventToCommandBehavior>
+                                </Entry.Behaviors>
+                            </Entry>
+
+                        </FlexLayout>
+
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+
+                            <Entry  Placeholder="Propina" 
+                                    WidthRequest="400"  
+                                    Text="{Binding Propina, Mode = TwoWay}" 
+                                    BackgroundColor="White" 
+                                    Keyboard="Numeric" >
+                                <Entry.Behaviors>
+                                    <behaviorsPack:EventToCommandBehavior
+                                    Command="{Binding TextChangedCommand}"
+                                    EventName="TextChanged"
+                                    EventArgsPropertyPath="NewTextValue">
+                                    </behaviorsPack:EventToCommandBehavior>
+                                </Entry.Behaviors>
+                            </Entry>
+                        <Entry Placeholder="Total" 
+                                   WidthRequest="400" 
+                                   Margin="20,0,0,0" 
+                                   Text="{Binding Total, Mode = TwoWay}" 
+                                   BackgroundColor="White" 
+                                   Keyboard="Numeric" 
+                                   IsReadOnly="True"/>
+                    </FlexLayout>
+
+
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                            
+                        <Label Text="Fecha en la que se generó el gasto:" 
+                               LineBreakMode="WordWrap" 
+                               WidthRequest="160" 
+                               HorizontalTextAlignment="Start" 
+                               Margin="0,10" 
+                               TextColor="#2E2E2E"/>
+                            <DatePicker  
+                                Format="dd/MM/yyyy" 
+                                Date="{Binding FechaGeneroGasto}" 
+                                BackgroundColor="White" 
+                                WidthRequest="200"                                 
+                                FontSize="18"
+                                HorizontalOptions="FillAndExpand"/>
+                        </FlexLayout>
+                    
+                    <Picker Title="Gasto" 
+                                ItemsSource="{Binding GastosList}"  
+                                SelectedItem="{Binding SelectedTipoGasto}" 
+                                BackgroundColor="White">
+                            <Picker.Behaviors>
+                                <behaviorsPack:EventToCommandBehavior
+                             Command="{Binding TappedCommandTipoGasto}"
+                             EventName="SelectedIndexChanged"
+                             EventArgsPropertyPath="Item"/>
+                            </Picker.Behaviors>
+                    </Picker>
+                    
+                    <!--En caso de seleecionar "Combustilble, se habilitará está sección."-->
+                    <StackLayout IsVisible="{Binding VisibleImageKilometres}">
+                        <Label Text="Comprobar kilómetros:"></Label>
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+                            <Button Text="Imagen" Command="{Binding SelectImageKilometres}" BackgroundColor="Black" CornerRadius="50"></Button>
+                            <Button Text="Foto" Margin="20,0,20,0" Command="{Binding TakePhotoKilometres}" BackgroundColor="Black" CornerRadius="50"></Button>
+                        </FlexLayout>
+                        <ImageButton Source="{Binding ResultImageKilometres, Mode=TwoWay}" 
+                                 Margin="0,30"
+                                 Command="{Binding OpenImageKilometres}"
+                                 BackgroundColor="Transparent"/>
+                    </StackLayout>
+                        
+                    <!--<Picker Title="N° de comensales"--> 
+                    <Picker Title="{Binding TitleComensales}" 
+                                ItemsSource="{Binding NoComensales}"  
+                                IsVisible="{Binding VisibleNoComensales}" 
+                                SelectedItem="{Binding SelectedNoComensales}" 
+                                BackgroundColor="White"/>
+                        
+                    <Editor Placeholder="Detalles" 
+                                Text="{Binding Detalles}"
+                                BackgroundColor="White"/>
+                    <FlexLayout Direction="Row"
+                                AlignItems="Center"
+                                JustifyContent="Center" Margin="0,20">
+                        <StackLayout>
+                            <Button Text="Agregar" 
+                                    Command="{Binding Save, Mode=TwoWay}" 
+                                    BackgroundColor="Black" 
+                                    CornerRadius="50"
+                                    FontSize="15"
+                                    FontAttributes="Bold"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <Button Text="Salir" 
+                                    Margin="20,0,0,0"  
+                                    Command="{Binding Exit, Mode=TwoWay}" 
+                                    BackgroundColor="Black" 
+                                    CornerRadius="50"
+                                    Padding="20,0,20,0"
+                                    FontSize="15"
+                                    FontAttributes="Bold"/>
+                        </StackLayout>
+                            <!--<Button Text="Guardar" Command="{Binding Save, Mode=TwoWay}" BackgroundColor="Black" CornerRadius="50"/>-->
+                            <!--<Button Text="Salir" Margin="20,0,0,0"  Command="{Binding Exit}" BackgroundColor="Black" CornerRadius="50" Padding="20,0,20,0"></Button>-->
+                        </FlexLayout>
+                    </StackLayout>
+                    <!--<ScrollView IsVisible="true">
+                <StackLayout>
+                    <StackLayout x:Name="Factura" IsVisible="true">
+                        <Entry Placeholder="N° Factura/Comprobante" Text="{Binding Serie, Mode=TwoWay}"></Entry>
+                        <Entry Placeholder="RFC" Text="{Binding RFC, Mode=TwoWay}"></Entry>
+                        <Entry Placeholder="Razón social" Text="{Binding RazonSocial, Mode=TwoWay}"></Entry>
+                        <Entry Placeholder="Folio fiscal  UUID" Text="000000"></Entry>
+                        <Entry Placeholder="N° certificado" Text="000000"></Entry>
+
+                        <StackLayout>
+                            <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                                <Label Text="Fecha comprobante:" LineBreakMode="WordWrap" WidthRequest="100" HorizontalTextAlignment="Start" Margin="0,10"></Label>
+                                <DatePicker  Format="dd/MM/yyyy" />
+                            </FlexLayout>
+                            <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                                <Label Text="Fecha timbrado:" LineBreakMode="WordWrap" WidthRequest="100" HorizontalTextAlignment="Start" Margin="0,10"></Label>
+                                <DatePicker  Format="dd/MM/yyyy" />
+                            </FlexLayout>
+                            <Entry Placeholder="Método de pago" Text="00" WidthRequest="250"></Entry>
+                        </StackLayout>
+                    </StackLayout>
+                    -->
+                    <!--Con o sin factura-->
+                    <!--
+                    <StackLayout IsVisible="{Binding VisibleConFactura, Mode=TwoWay}">
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+
+                            <Entry Placeholder="Importe" WidthRequest="400" Text="000000"></Entry>
+                            <Entry Placeholder="IVA 16%" WidthRequest="400" Text="000000" Margin="20,0,0,0"></Entry>
+
+                        </FlexLayout>
+
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+
+                            <Entry Placeholder="Propina" WidthRequest="400"  Text="00000000"></Entry>
+                            <Entry Placeholder="Subtotal" WidthRequest="400" Margin="20,0,0,0" Text="000000000"></Entry>
+                        </FlexLayout>
+
+
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                            <Label Text="Fecha en la que se generó el gasto:" LineBreakMode="WordWrap" WidthRequest="150" HorizontalTextAlignment="Start" Margin="0,10"/>
+                            <DatePicker  Format="dd/MM/yyyy"/>
+                        </FlexLayout>
+                        <Picker Title="Gasto"></Picker>
+                        <Picker Title="N° de comensales"></Picker>
+                        <Editor Placeholder="Detalles" ></Editor>
+                        <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+                            <Button Text="Guardar"></Button>
+                            <Button Text="Cancelar" Margin="20,0,0,0"></Button>
+                        </FlexLayout>
+                    </StackLayout>
+
+
+
+
+
+                    -->
+                    <!-- der, arrighba,izq , abajo-->
+                    <!--
+
+                </StackLayout>
+            </ScrollView>-->
+                    <!--<Label Text="Gasto de impuesto adicional al gasto no deducible por no tener factura de requisitos fiscales. 30% de ISR + 16% de IVA." Margin="0,10,0,0"></Label>-->
+
+               
+                    
+            </StackLayout>
+          
+
+        </ScrollView>
+          
+     
+      
+     
+      
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:behaviorsPack ="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             
+             x:Class="UpExpenses_Xamarin.Views.GastosEnviadosPage">
+    <NavigationPage.TitleView>
+        <Label Text="Gastos"
+               FontSize="20"
+               TextColor="White"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Padding="30" 
+                     BackgroundColor="White" 
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand" >
+
+            <Label Text="Lista de gastos"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" 
+                   FontSize="20"
+                   TextColor="Black"
+                   Margin="0,0,0,30"
+                   FontAttributes="Bold"/>
+                                
+            <!-- der, arrighba,izq , abajo-->
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}"
+                         RefreshColor="Black">
+                
+                <ListView ItemsSource="{Binding GastosEnviados, Mode=TwoWay}" 
+                      HasUnevenRows="True" 
+                      SeparatorVisibility="Default" 
+                      SeparatorColor="DarkGray" 
+                      SelectionMode="None">
+
+                    <ListView.Behaviors>
+                        <behaviorsPack:EventToCommandBehavior
+                        Command="{Binding ItemTappedCommand}"
+                        EventName="ItemTapped"
+                        EventArgsPropertyPath="Item"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="0">
+                                    <Grid.RowDefinitions>
+
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*" ></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.RowSpan="1"                                     
+                                       Margin="0,10,0,0"                                    
+                                       VerticalOptions="Center"
+                                       Source="gasto_item.png"/>
+
+                                    <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       FontAttributes="Bold" 
+                                       Text="{Binding Gasto, Mode=TwoWay}" 
+                                       TextColor="Black" 
+                                       FontSize="15"
+                                       Margin="0,10,0,0"
+                                       LineBreakMode="TailTruncation"/>
+
+                                    <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding FechaGeneroGasto, Mode=TwoWay}" 
+                                       />
+
+                                    <Label Grid.Row="2"
+                                       Grid.Column="1"
+                                       Text="{Binding StrTotal, Mode=TwoWay}" 
+                                       Padding="0,0,0,15"/>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RefreshView>
+            <BoxView  VerticalOptions="Center"           
+                      HorizontalOptions="Center"
+                      HeightRequest="1"
+                      WidthRequest="300"  
+                      Color="#5b5d68"/>
+
+            <Label Text="Sistema de gastos" 
+                   HorizontalTextAlignment="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

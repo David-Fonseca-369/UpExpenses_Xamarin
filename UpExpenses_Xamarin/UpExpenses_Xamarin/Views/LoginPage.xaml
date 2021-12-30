@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+          
+           
+             Visual="Material"
+             x:Class="UpExpenses_Xamarin.Views.LoginPage">
+   
+    <ContentPage.Content>
+        
+        <Grid>
+            <Image Source="fondoLogin.jpg" 
+                   Aspect="AspectFill"/>
+            <BoxView BackgroundColor="White" 
+                     Opacity="0.4"/>
+            <StackLayout>
+
+                <Image  
+                    Source="logoElkay.png" 
+                    WidthRequest="100" 
+                    HeightRequest="100" 
+                    Margin="0,50,0,30"></Image>
+                <Label  Text="Sistema de gastos"  
+                        Margin="0,10,0,25" 
+                        HorizontalTextAlignment="Center" 
+                        FontAttributes="Bold" 
+                        FontSize="Title" 
+                        TextColor="Black"/>
+
+                <StackLayout Grid.Row="1" 
+                             Padding="30">
+
+                    <Entry Text="{Binding User, Mode=TwoWay}" 
+                           Placeholder="Usuario" 
+                           PlaceholderColor="Black" 
+                           TextColor="Black"
+                           Margin="0,0,0,10" 
+                           BackgroundColor="Transparent"/>
+
+                    <Entry Text="{Binding Password, Mode=TwoWay}" 
+                           Placeholder="Contraseña" 
+                           PlaceholderColor="Black" 
+                           IsPassword="{Binding PasswordController, Mode=TwoWay}" 
+                           TextColor="Black"
+                           BackgroundColor="Transparent"/>
+                    
+                    <Label Text="{Binding Messagge, Mode=TwoWay}" 
+                           TextColor="DarkRed" 
+                           IsVisible="{Binding Visible, Mode=TwoWay}"  
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+
+                    <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+
+                        <CheckBox IsChecked="{Binding PasswordController, Mode=TwoWay}" 
+                                  Margin="0,-7" 
+                                  Color="Black"/>
+
+                        <Label Text="Ocultar contraseña." 
+                               TextColor="Black" 
+                               Margin="-15,0" 
+                               FontSize="15"/>
+                    </FlexLayout>
+
+                    <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                        
+                        <CheckBox IsChecked="{Binding GuardarNombre, Mode=TwoWay}" 
+                                  Margin="0,-7" 
+                                  Color="Black"/>
+
+                        <Label Text="Recordar nombre de usuario." 
+                               TextColor="Black" 
+                               Margin="-15,0" 
+                               FontSize="15"/>
+                    </FlexLayout>
+                    <!--<Label Text="{Binding Messagge, Mode=TwoWay}" TextColor="#BB0F0B" IsVisible="{Binding Visible, Mode=TwoWay}" FontAttributes="Bold" FontSize="18"></Label>-->
+                </StackLayout>
+                
+
+                <StackLayout Padding="30">
+                    <Button Text="Iniciar sesión" 
+                            BackgroundColor="Black" 
+                            BorderRadius="20" 
+                            TextColor="White" 
+                            Opacity="1"  
+                            Command="{Binding Login}"
+                            Margin="0,0,0,0"/>
+                </StackLayout>
+
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               Color="Black"
+                               IsVisible="{Binding IsBusy, Mode=TwoWay}"/>
+        </Grid>
+     
+
+    </ContentPage.Content>
+</ContentPage>

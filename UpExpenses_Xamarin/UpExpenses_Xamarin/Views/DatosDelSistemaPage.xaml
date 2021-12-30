@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UpExpenses_Xamarin.Views.DatosDelSistemaPage">
+    <NavigationPage.TitleView>
+            <StackLayout>
+                <Label Text="Datos del sistema"  
+                   FontSize="20"
+                   TextColor="White"/>
+            </StackLayout>
+        </NavigationPage.TitleView>
+        <ContentPage.Content>
+            <StackLayout Padding="30"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     BackgroundColor="White">
+                <Label Text="Servicio web REST"                
+                HorizontalOptions="CenterAndExpand" 
+                   Margin="0,30,0,30"
+                   FontSize="20"
+                   TextColor="Black"/>
+            <Image Source="restApi.png" 
+                       HorizontalOptions="Center"/>
+                
+            <Label Text="{Binding LastUpdate, Mode=TwoWay}"
+                   Margin="0,10,0,0" 
+                   HorizontalTextAlignment="Center"/>
+                
+            <Button Text="Actualizar" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    Visual="Material"
+                    CornerRadius="50"
+                    Margin="0,0,0,30"
+                    Command="{Binding Update}"/>
+
+            <StackLayout>
+                <BoxView   VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HeightRequest="1"
+                       WidthRequest="300"  
+                       Color="#5b5d68"/>
+                <Label Text="Sistema de gastos" 
+                   HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"
+                               Color="Black"
+                               IsVisible="{Binding IsBusy, Mode=TwoWay}"/>
+        </StackLayout>
+        </ContentPage.Content>
+</ContentPage>

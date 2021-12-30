@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:behaviorsPack ="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             
+             x:Class="UpExpenses_Xamarin.Views.MenuNuevoPage">
+
+    <NavigationPage.TitleView>
+        <StackLayout>
+            
+            <Label Text="Nuevo"
+                   FontSize="20" 
+                   TextColor="AliceBlue"/>
+            
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content >
+
+        <StackLayout Padding="30" 
+                     BackgroundColor="Black"
+                     HorizontalOptions="FillAndExpand" 
+                     VerticalOptions="FillAndExpand">
+
+
+            <Label Text="Opciones"
+                HorizontalOptions="Center"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Center"
+                   FontSize="30" Margin="0,0,0,80"/>
+
+
+            <!-- der, arrighba,izq , abajo-->
+
+            <ListView ItemsSource="{Binding ListDetails}" 
+                      BackgroundColor="Black" 
+                      HasUnevenRows="True">
+                
+                <ListView.Behaviors>
+                    <behaviorsPack:EventToCommandBehavior
+                        Command="{Binding ItemTappedCommand}"
+                        EventName="ItemTapped"
+                        EventArgsPropertyPath="Item"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="4"
+                                  Margin="4">
+                                
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*">
+                                    </RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".5*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2.6"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Frame IsClippedToBounds="True" 
+                                       Grid.Row="0" 
+                                       HasShadow="True" 
+                                       Padding="0" 
+                                       BackgroundColor="#151515">
+                                    
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="Start"
+                                                 VerticalOptions="Center">
+
+                                        <BoxView HeightRequest="100" 
+                                                 WidthRequest="6"
+                                                 VerticalOptions="Center" 
+                                                 BackgroundColor="#6C6463"/>
+
+                                        <Image Source="{Binding ImgIcon}" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"/>
+
+                                        <Label Text="{Binding Name}" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"
+                                               TextColor="Gray"
+                                               FontSize="25"
+                                               Margin="20"/>
+                                        
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023178616789",
+    "project_id": "sistema-de-gastos",
+    "storage_bucket": "sistema-de-gastos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023178616789:android:abb305bb55d258c03bd75c",
+        "android_client_info": {
+          "package_name": "com.elkay.upexpenses_xamarin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023178616789-gls4vmlilnrc9ftblaohsuq55it3nvtp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJC8sPyYKd--ln9UDnGpiFm6pUX_T4W9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023178616789-gls4vmlilnrc9ftblaohsuq55it3nvtp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

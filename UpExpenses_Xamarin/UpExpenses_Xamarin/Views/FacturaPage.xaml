@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:pages ="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations = "clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"               
+             Visual="Material"
+                 
+             x:Class="UpExpenses_Xamarin.Views.FacturaPage">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <ContentPage.Content>
+        <Frame BackgroundColor="White" 
+               HasShadow="True" 
+               CornerRadius="10" 
+               Margin="20,0,20,0" 
+               VerticalOptions="Center">
+            
+            <StackLayout Padding="5">
+                <Label Text="Factura" 
+                       HorizontalOptions="Center" 
+                       Margin="5" 
+                       FontAttributes="Bold" 
+                       TextColor="Black" 
+                       FontSize="Medium"/>
+
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout x:Name="Factura" 
+                                     IsVisible="true">
+                            <Entry Placeholder="N° Factura/Comprobante" 
+                                   Text="{Binding  NoFactura, Mode=TwoWay}" 
+                                   IsReadOnly="True" BackgroundColor="White"/>
+
+                            <Entry Placeholder="RFC" 
+                                   Text="{Binding RFC, Mode=TwoWay}"
+                                   IsReadOnly="True" BackgroundColor="White"/>
+
+                            <Entry Placeholder="Razón social" 
+                                   Text="{Binding RazonSocial, Mode=TwoWay}" 
+                                   IsReadOnly="True" BackgroundColor="White">
+                            </Entry>
+                            
+                            <Entry Placeholder="Folio fiscal  UUID" 
+                                   
+                                   Text="{Binding UUID, Mode=TwoWay}" 
+                                   IsReadOnly="True" 
+                                   BackgroundColor="White"></Entry>
+                            <Entry Placeholder="N° certificado" Text="{Binding NoCertificadoSAT, Mode=TwoWay}" IsReadOnly="True" BackgroundColor="White"></Entry>
+
+                            <StackLayout>
+                                <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                                    <Label Text="Fecha comprobante:" LineBreakMode="WordWrap" WidthRequest="100" HorizontalTextAlignment="Start" Margin="0,10" TextColor="Black"></Label>
+                                    <DatePicker  Format="dd/MM/yyyy"  Date="{Binding FechaComprobante, Mode=TwoWay}" IsEnabled="False" BackgroundColor="White"/>
+                                </FlexLayout>
+                                <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                                    <Label Text="Fecha timbrado:" LineBreakMode="WordWrap" WidthRequest="100" HorizontalTextAlignment="Start" Margin="0,10" TextColor="Black"></Label>
+                                    <DatePicker  Format="dd/MM/yyyy" Date="{Binding FechaTimbrado, Mode=TwoWay}" IsEnabled="False" BackgroundColor="White"/>
+                                </FlexLayout>
+                                <Entry Placeholder="Método de pago" Text="{Binding MetodoPago, Mode=TwoWay}" WidthRequest="250" IsReadOnly="True" BackgroundColor="White"></Entry>
+                            </StackLayout>
+                        </StackLayout>
+                        <!--Con o sin factura-->
+                        <!--No está visible-->
+                        <StackLayout IsVisible="False">
+                            <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+
+                                <Entry Placeholder="Importe" WidthRequest="400" Text="{Binding Subtotal, Mode=TwoWay}"></Entry>
+                                <Entry Placeholder="IVA 16%" WidthRequest="400" Text="{Binding IVA, Mode=TwoWay}" Margin="20,0,0,0"></Entry>
+
+                            </FlexLayout>
+
+                            <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Center">
+
+                                <Entry Placeholder="Propina" WidthRequest="400"  Text="00000000"></Entry>
+                                <Entry Placeholder="Total" WidthRequest="400" Margin="20,0,0,0" Text="{Binding Total,Mode=TwoWay}"></Entry>
+                            </FlexLayout>
+
+
+                            <FlexLayout Direction="Row"
+                                AlignItems="Start"
+                                JustifyContent="Start">
+                                <Label Text="Fecha en la que se generó el gasto:" LineBreakMode="WordWrap" WidthRequest="150" HorizontalTextAlignment="Start" Margin="0,10" TextColor="Black"/>
+                                <DatePicker  Format="dd/MM/yyyy"/>
+                            </FlexLayout>
+                            <Picker Title="Gasto"></Picker>
+                            <Picker Title="N° de comensales"></Picker>
+                            <Editor Placeholder="Detalles" ></Editor>
+                        </StackLayout>
+                        <!-- der, arrighba,izq , abajo-->
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                    <Button Text="OK" BackgroundColor="Black" HorizontalOptions="FillAndExpand"
+                            Margin="0" Command="{Binding ClosePopup}" TextColor="White"></Button>
+                </StackLayout>
+           
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content> 
+</pages:PopupPage>

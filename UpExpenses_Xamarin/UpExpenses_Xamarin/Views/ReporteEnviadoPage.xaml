@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UpExpenses_Xamarin.Views.ReporteEnviadoPage"
+             
+             Visual="Material"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+           >
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <StackLayout BackgroundColor="Black"  HeightRequest="300">
+
+                <StackLayout HorizontalOptions="Center" Margin="0,100">
+                    <Image 
+                    Source="success.png" 
+                    HeightRequest="60" 
+                    WidthRequest="60"                    
+                    ></Image>
+                    <Label 
+                        Text="¡Reporte enviado exitosamente!" 
+                        TextColor="White" 
+                        FontAttributes="Bold" 
+                        FontSize="Title" Margin="0,40"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout 
+                    HorizontalOptions="Center" 
+                    Margin="0,40,0,0">
+
+                <Label Text="Concepto" 
+                       HorizontalOptions="Center"
+                       TextColor="Black" FontSize="18"/>
+                <Label Text="{Binding Concepto}" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       Margin="0,0,0,20" 
+                       TextColor="Black" 
+                       FontSize="18"/>
+                <FlexLayout 
+                    Direction="Row"
+                    AlignItems="Start"
+                    JustifyContent="Center">
+                    <Label 
+                        Text="Folio: " 
+                        TextColor="Black"
+                        FontSize="15"/>
+                    <Label 
+                        Text="{Binding Folio, Mode=TwoWay}" 
+                        FontAttributes="Bold" 
+                        TextColor="Black"
+                        FontSize="15"/>
+                </FlexLayout>
+                <FlexLayout 
+                    Direction="Row"
+                    AlignItems="Start"
+                    JustifyContent="Center">
+
+                    <Label 
+                        Text="Autorizador 1: " 
+                        TextColor="Black" 
+                        FontSize="15"/>
+                    
+                    <Label 
+                        Text="{Binding Emp_Release, Mode=TwoWay}" 
+                        FontAttributes="Bold" 
+                        TextColor="Black" 
+                        FontSize="15"/>
+                    
+                </FlexLayout>
+                <FlexLayout 
+                    Direction="Row"
+                    AlignItems="Start"
+                    JustifyContent="Center">
+                    
+                    <Label 
+                        Text="Autorizador 2: " 
+                        TextColor="Black"
+                        FontSize="15"/>
+                    
+                    <Label 
+                        Text="{Binding Emp_Finance, Mode=TwoWay}" 
+                        FontAttributes="Bold" 
+                        TextColor="Black"
+                        FontSize="15"/>
+                    
+                </FlexLayout>
+                <StackLayout Padding="60">
+                    
+                    <Button 
+                            Text="Salir" 
+                            Margin="0,40,0,0" 
+                            CornerRadius="50" 
+                            BackgroundColor="Black"
+                            Command="{Binding Salir}"/>
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

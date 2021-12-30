@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             NavigationPage.HasNavigationBar="False"
+                  
+             x:Class="UpExpenses_Xamarin.Views.NavigationMasterPage">
+
+    <MasterDetailPage.Master>
+        <!--It's better to add font image source check this out for hamburger icons :  https://www.youtube.com/watch?v=tm_PEYwDnmE-->
+        <ContentPage IconImageSource="Hamburgericon.png" 
+                     Title="Title"
+                     BackgroundColor="White">
+            <StackLayout Orientation="Vertical">
+                <ListView x:Name="navigationDrawerList"
+                          RowHeight="55"
+                          SeparatorVisibility="None"
+                          ItemTapped="Handle_ItemTapped"
+                          BackgroundColor="White">
+                    <ListView.Header>
+                        <StackLayout BackgroundColor="White">
+                            <Grid HorizontalOptions="FillAndExpand"
+                                  VerticalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <controls:CircleImage  Aspect="AspectFit"  
+                                                       HeightRequest="50" 
+                                                       WidthRequest="50" 
+                                                       BorderColor="Black"
+                                                       BorderThickness="0"
+                                                       Source="profile_user.png"
+                                                       Grid.Column="1" 
+                                                       Grid.Row="1"/>
+
+                                <StackLayout  Grid.Row="1" 
+                                              VerticalOptions="CenterAndExpand"
+                                              Grid.ColumnSpan="2"  
+                                              Margin="10,0,0,0"
+                                              Grid.Column="2" 
+                                              Orientation="Vertical" >
+                                   <Label x:Name="lblName" 
+                                          FontSize="14"  
+                                          Text="User"
+                                          HorizontalTextAlignment="Start"
+                                          VerticalTextAlignment="Center"
+                                          TextColor="Black" 
+                                          FontAttributes="Bold"/>    
+                                   <Label x:Name="lblEmail" 
+                                          FontSize="12" 
+                                          Text="Email"  
+                                          HorizontalTextAlignment="Start"
+                                          VerticalTextAlignment="Center"
+                                          TextColor="Black"
+                                          Margin="0,0,0,00"/>
+                                </StackLayout>
+                                <StackLayout Grid.Row="2"
+                                             Grid.ColumnSpan="3">
+                                    <BoxView VerticalOptions="Center"
+                                             HorizontalOptions="Center"
+                                             HeightRequest="1"
+                                             WidthRequest="400"  
+                                             Color="#5b5d68" Margin="0,20"/> 
+                                </StackLayout>                                 
+                            </Grid>
+                        </StackLayout>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout VerticalOptions="FillAndExpand"  
+                                             Orientation="Horizontal"  
+                                             Padding="20,10,0,10"  
+                                             Spacing="20">
+                                    <Image Source="{Binding Icon}"  
+                                           WidthRequest="20"  
+                                           HeightRequest="20"  
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding Title}"  
+                                           FontSize="Small"  
+                                           VerticalOptions="Center"  
+                                           TextColor="Black"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

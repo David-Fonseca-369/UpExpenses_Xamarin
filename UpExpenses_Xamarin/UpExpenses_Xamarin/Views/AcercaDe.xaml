@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UpExpenses_Xamarin.Views.AcercaDe">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+            <Label Text="&#xE800;"                
+                HorizontalOptions="CenterAndExpand"
+                FontFamily="fontello"
+                FontSize="30"
+                   TextColor="Black"/>
+            <Label x:Name="lblMensajeFirebase" Text="Preubas"></Label>
+            <Button Text="Ver registros" Clicked="Button_Clicked"></Button>
+            <Entry Placeholder="Id de reporte" x:Name="lblIdReporte" Keyboard="Numeric"></Entry>
+            <Button Text="Obtener id" Clicked="Button_Clicked_1"></Button>
+            <Button Text="Cargar tipo gastos" Clicked="Button_Clicked_2"></Button>
+            <Button Text="Load master" Clicked="Button_Clicked_3"></Button>
+            <Button Text="Update gastos" Clicked="Button_Clicked_4"></Button>
+            <Button Text="Cargar gastos" Clicked="Button_Clicked_5"/>
+            <Button Text="Display a prompt" Clicked="Button_Clicked_6"></Button>
+            <Button Text="Prueba API anticipos" Clicked="Button_Clicked_7"></Button>
+            <Button Text="DisplayActionSheet" Clicked="Button_Clicked_8"></Button>
+            <Button Text="Traer último ID" Clicked="Button_Clicked_9"></Button>
+            <Entry x:Name="txtId" Keyboard="Numeric"></Entry>
+            <Button Text="Busque por id" Clicked="Button_Clicked_10"></Button>
+            <Entry x:Name="txtIdChildren"></Entry>
+            <Button Text="Obtener Tuple de hijo" Clicked="Button_Clicked_11"></Button>
+            <Image Source="logoElkay.png" x:Name="imgSample"></Image>
+            <Button Text="Ampliar imagen" Clicked="Button_Clicked_12"></Button>
+            <Button Text="Card Report" Clicked="Button_Clicked_13"></Button>
+                <Entry x:Name="txtIdViaje" Placeholder="Id para viaje" Keyboard="Numeric"></Entry>
+                <Button Text="Traer viaje" Clicked="Button_Clicked_14"></Button>
+                <Entry x:Name="txtNivel" Placeholder="nivel" Keyboard="Numeric"></Entry>
+                <Entry x:Name="txtConceptoGasto" Placeholder="concepto gasto"></Entry>
+                <Button Text="Puede gastar" Clicked="Button_Clicked_16"></Button>
+                <Button Text="GastoCve" Clicked="Button_Clicked_17"></Button>
+                <Button Text="Get token" Clicked="Button_Clicked_18"></Button>
+                <Entry Placeholder="Folio anticipo" x:Name="txtFolioAnticipo" Keyboard="Numeric"></Entry>
+                <Button Text="Checar folio" Clicked="Button_Clicked_19"></Button>
+
+                <Button Text="Folio pendientes" Clicked="Button_Clicked_20"></Button>
+                <Button Text="Modificar Reporte" Clicked="Button_Clicked_21"></Button>
+                <Button Text="Reporte autorizar" Clicked="Button_Clicked_22"></Button>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
